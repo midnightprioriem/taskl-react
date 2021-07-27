@@ -1,48 +1,73 @@
-import styles from './login.module.css'
-import { Grid, TextField, Typography, Button } from '@material-ui/core';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Grid, Checkbox, FormControlLabel, Link, Container, TextField, Typography, Button } from '@material-ui/core';
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
-const Login = () => {
+import styles from './login.module.css';
+import PasswordField from './PasswordField';
+
+const Login = ({ setToken }) => {
+
+    const [username, setUserName] = useState();
+    const [password, setPassword] = useState();
+
     return (
-        <Grid container
-            justifyContent="center"
-            alignItems="center"
-            display="flex"
-            direction="column"
-            spacing={3}
-            className={styles.root}
-        >
-            <Grid item>
-                <Typography variant="h3" gutterBottom>
-                    Login
+        <Container className={styles.root}>
+            <Typography variant="h3" align="center" gutterBottom style={{ fontWeight: 700 }}>
+                Sign In.
             </Typography>
-            </Grid>
-            <Grid item className={styles.gridItem}>
+            <Typography variant="body1" color="textSecondary" align="center">
+                Welcome Back!
+            </Typography>
+            <form>
                 <TextField
                     InputProps={{
                         className: styles.textInput,
                     }}
+                    margin="normal"
                     id="username"
                     label="Username"
                     variant="outlined"
-                    fullWidth={true} />
-            </Grid>
-            <Grid item className={styles.gridItem}>
-                <TextField
-                    InputProps={{
-                        className: styles.textInput,
-                    }}
+                    fullWidth={true}
+                    onChange={e => setUserName(e.target.value)} />
+                <PasswordField
                     id="password"
-                    label="Password"
-                    variant="outlined"
-                    type="password"
-                    fullWidth={true} />
-            </Grid>
-            <Grid item className={styles.gridItem}>
-                <Button className={styles.button} variant="contained" color="primary" fullWidth={true}>Login</Button>
-            </Grid>
-        </Grid>
+                    fullWidth={true}
+                    margin="normal"
+                    onChange={e => setPassword(e.target.value)}
+                />
+                < FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Stay logged in"
+                />
+                <Button
+                    type="submit"
+                    className={styles.button}
+                    variant="contained" color="primary"
+                    fullWidth={true}
+                    endIcon={<ArrowRightAltIcon/>}>
+                    Login
+                </Button>
+                <Grid container justifyContent="space-between">
+                    <Grid item>
+                        <Link href="#" variant="body2" >
+                            Forgot password?
+                        </Link>
+                    </Grid>
+                    <Grid item>
+                        <Link href="#" variant="body2" >
+                            {"Don't have an account? Sign Up"}
+                        </Link>
+                    </Grid>
+                </Grid>
+            </form>
+        </Container >
     );
 
+}
+
+Login.propTypes = {
+    setToken: PropTypes.func.isRequired
 }
 
 export default Login;
