@@ -1,0 +1,17 @@
+.root {
+    height: 100%;
+    flex-grow: 1;
+}
+
+.gridItem {
+    width: 90%;
+    max-width: 400px;
+}
+
+.textInput {
+    border-radius: 24px;
+}
+
+.button {
+    border-radius: 24px;
+}
