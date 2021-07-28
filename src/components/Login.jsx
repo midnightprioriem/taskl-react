@@ -5,11 +5,13 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import styles from './login.module.css';
 import PasswordField from './PasswordField';
+import TasklApi, {setClientToken} from '../TasklApi/TasklApi';
 
 const Login = ({ setToken }) => {
 
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
+    const [loading, setLoading] = useState();
 
     return (
         <Container className={styles.root}>
