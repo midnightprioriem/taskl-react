@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Checkbox, FormControlLabel, Link, Container, TextField, Typography, Button } from '@material-ui/core';
+import { Grid, Checkbox, FormControlLabel, Link, Container, TextField, Typography } from '@material-ui/core';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import styles from './login.module.css';
 import PasswordField from './PasswordField';
+import LoadingButton from './LoadingButton';
 import TasklApi, { setClientToken } from '../TasklApi/TasklApi';
 
 const Login = ({ setToken }) => {
 
-    const [username, setUserName] = useState();
-    const [password, setPassword] = useState();
-    const [loading, setLoading] = useState();
+    const [username, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setLoading(true);
+        console.log("login submitted: " + username + " " + password)
+    }
 
     return (
         <Container className={styles.root}>
@@ -21,7 +28,7 @@ const Login = ({ setToken }) => {
             <Typography variant="body1" color="textSecondary" align="center">
                 Welcome Back!
             </Typography>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <TextField
                     InputProps={{
                         className: styles.textInput,
@@ -42,14 +49,17 @@ const Login = ({ setToken }) => {
                     control={<Checkbox value="remember" color="primary" />}
                     label="Stay logged in"
                 />
-                <Button
+                <LoadingButton
                     type="submit"
+                    loading={loading}
                     className={styles.button}
-                    variant="contained" color="primary"
+                    variant="contained"
+                    color="primary"
                     fullWidth={true}
-                    endIcon={<ArrowRightAltIcon />}>
+                    endIcon={<ArrowRightAltIcon />}
+                    disabled={loading}>
                     Login
-                </Button>
+                </LoadingButton>
                 <Grid container justifyContent="space-between">
                     <Grid item>
                         <Link href="#" variant="body2" >
