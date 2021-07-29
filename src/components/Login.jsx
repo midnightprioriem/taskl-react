@@ -5,7 +5,7 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import styles from './login.module.css';
 import PasswordField from './PasswordField';
-import TasklApi, {setClientToken} from '../TasklApi/TasklApi';
+import TasklApi, { setClientToken } from '../TasklApi/TasklApi';
 
 const Login = ({ setToken }) => {
 
@@ -47,7 +47,7 @@ const Login = ({ setToken }) => {
                     className={styles.button}
                     variant="contained" color="primary"
                     fullWidth={true}
-                    endIcon={<ArrowRightAltIcon/>}>
+                    endIcon={<ArrowRightAltIcon />}>
                     Login
                 </Button>
                 <Grid container justifyContent="space-between">
