@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CircularProgress, Button } from '@material-ui/core';
+import clsx from 'clsx';
 
 import styles from './loadingbutton.module.css';
 
 const LoadingButton = (props) => {
-    const { loading } = props;
+    const { loading, label, buttonClassName, ...childProps } = props;
     const [progress, setProgress] = useState(false);
     const timerRef = useRef();
     useEffect(() => {
@@ -20,12 +21,14 @@ const LoadingButton = (props) => {
         }
     }, [loading]);
     return (
-        <div className={styles.root}>
+        <div >
             <Button
-                {...props}
+                {...childProps}
+                className={clsx(buttonClassName, styles.button)}
                 disabled={progress}>
+                {label}
+                {progress && <CircularProgress className={styles.progress} size={24} />}
             </Button>
-            {progress && <CircularProgress className={styles.progress} size={24} />}
         </div>
 
     );
