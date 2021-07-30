@@ -2,10 +2,12 @@ import './App.css';
 import { useState } from 'react';
 import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Login from './components/Login'
-import Copyright from './components/Copyright'
+import Landing from './components/Landing';
+import Login from './components/Login';
+import Header from './components/Header';
+import Copyright from './components/Copyright';
 import NordTheme from "./themes/norde";
 
 function App() {
@@ -17,9 +19,10 @@ function App() {
                 <CssBaseline />
                 <div className="App" >
                     <Router>
+                        <Header />
                         <Switch>
                             <Route exact path="/">
-                                <Link to="/login">Login</Link>
+                                <Landing />
                             </Route>
                             <Route path="/login">
                                 <Login userLoggedIn={setLoggedIn} />
@@ -31,8 +34,8 @@ function App() {
                                 }
                             </Route>
                         </Switch>
+                        <Copyright />
                     </Router>
-                    <Copyright />
                 </div>
             </StylesProvider>
         </ThemeProvider >

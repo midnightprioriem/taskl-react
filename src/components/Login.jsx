@@ -22,6 +22,7 @@ const Login = ({userLoggedIn}) => {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [errorOpen, setErrorOpen] = useState(false);
+    const [errorText, setErrorText] = useState("");
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
@@ -33,11 +34,13 @@ const Login = ({userLoggedIn}) => {
         setLoading(true);
         const result = await TasklApiKit.loginRequest(username, password);
         setLoading(false);
-        if(result) {
+        console.log(result);
+        if(result?.success) {
             userLoggedIn(true);
             console.log("login success!");
         }
         else {
+            setErrorText(result ? result.data : "Unable to connect to server.");
             setErrorOpen(true);
         }
     }
@@ -46,7 +49,7 @@ const Login = ({userLoggedIn}) => {
         <Container className={styles.root}>
             <Snackbar open={errorOpen} onClose={handleCloseError} autoHideDuration={6000} >
                 <Alert severity="error">
-                    Unable to login.
+                    Unable to login. Error: {errorText}
                 </Alert>
             </Snackbar>
             <Typography variant="h3" align="center" gutterBottom style={{ fontWeight: 700 }}>

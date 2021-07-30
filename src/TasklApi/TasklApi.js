@@ -14,7 +14,7 @@ let TasklApiKit = {
     apiInterceptor: null,
     setClientToken(token) {
         this.hasToken = true;
-        this.apiInterceptor = api.interceptors.request.use(function(config) {
+        this.apiInterceptor = api.interceptors.request.use(function (config) {
             config.headers.Authorization = `Token ${token}`;
             return config;
         })
@@ -33,12 +33,23 @@ let TasklApiKit = {
             });
             if (response.status === StatusCodes.OK) {
                 this.setClientToken(response.key);
-                return true;
+                return {
+                    success: true,
+                    data: null,
+                };
             } else {
-                return false;
+                console.log(response);
+                return {
+                    success: false,
+                    data: null,
+                };
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            return {
+                success: false,
+                data: error.message,
+            }
         }
     }
 

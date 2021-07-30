@@ -1,0 +1,41 @@
+.root {
+    display: flex;
+    flex: 1;
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.landingText {
+    font-size: 4vmax;
+    font-weight: 700;
+    margin: 5vw;
+    width: 80%;
+    max-width: 700px;
+    user-select: none;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.landingImage {
+    width: 80%;
+    max-width: 600px;
+    pointer-events: none;
+}
+
+.signUpLoginDiv {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 30px;
+}
+.loginButton {
+    margin: 10px;
+}
+.signUpButton {
+    margin: 10px;
+}
