@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Checkbox, FormControlLabel, Link, Container, TextField, Typography } from '@material-ui/core';
+import { Grid, Checkbox, FormControlLabel, Link, Container, TextField, Typography, Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import TasklApiKit from '../TasklApi/TasklApi';
@@ -8,22 +9,46 @@ import styles from './login.module.css';
 import PasswordField from './PasswordField';
 import LoadingButton from './LoadingButton';
 
-const Login = () => {
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+const Login = ({userLoggedIn}) => {
+
+    const handleCloseError = () => {
+        setErrorOpen(false);
+    }
 
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [errorOpen, setErrorOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(TasklApiKit.hasToken) {
+            //already logged in
+            return;
+        }
         setLoading(true);
         const result = await TasklApiKit.loginRequest(username, password);
-        console.log(result ? "login successful!" : "login failed.");
         setLoading(false);
+        if(result) {
+            userLoggedIn(true);
+            console.log("login success!");
+        }
+        else {
+            setErrorOpen(true);
+        }
     }
 
     return (
         <Container className={styles.root}>
+            <Snackbar open={errorOpen} onClose={handleCloseError} autoHideDuration={6000} >
+                <Alert severity="error">
+                    Unable to login.
+                </Alert>
+            </Snackbar>
             <Typography variant="h3" align="center" gutterBottom style={{ fontWeight: 700 }}>
                 Sign In.
             </Typography>
@@ -75,7 +100,10 @@ const Login = () => {
             </form>
         </Container >
     );
-
 }
+
+Login.propTypes = {
+    userLoggedIn: PropTypes.func.isRequired,
+};
 
 export default Login;
