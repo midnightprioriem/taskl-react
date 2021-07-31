@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CircularProgress, Button } from '@material-ui/core';
@@ -11,6 +12,7 @@ const LoadingButton = (props) => {
     const timerRef = useRef();
     useEffect(() => {
         if (loading) {
+            // @ts-ignore
             timerRef.current = window.setTimeout(() => {
                 setProgress(true);
             }, 500);

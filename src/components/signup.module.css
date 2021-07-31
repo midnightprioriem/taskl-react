@@ -1,0 +1,9 @@
+.root {
+    display: flex;
+    max-width: 500px;
+    flex: 1;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+}

@@ -1,21 +1,20 @@
-import { Typography, Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Typography } from '@material-ui/core';
 
-import undrawCheckBoxes from '../vector/undraw_Check_boxes_re_v40f.svg';
+import undrawCheckBoxes from '../vector/undraw_Add_tasks_re_s5yj.svg';
 import styles from './landing.module.css';
+import PageTransition from './PageTransition';
 
 const Landing = () => {
     return (
-        <div className={styles.root}>
-            <Typography variant="h2" className={styles.landingText}>
-                Complete your tasks or give them to your friends.
+        <PageTransition>
+            <div className={styles.root}>
+                <Typography variant="h2" className={styles.landingText}>
+                    Complete your tasks or give them to your friends.
             </Typography>
-            <img className={styles.landingImage} src={undrawCheckBoxes} alt="" />
-            <div className={styles.signUpLoginDiv}>
-                <Button className={styles.signUpButton} component={Link} to="/register" size="large">Sign Up</Button>
-                <Button className={styles.loginButton} component={Link} to="/login" size="large" variant="contained" color="primary">Login</Button>
+                <img className={styles.landingImage} src={undrawCheckBoxes} alt="" />
             </div>
-        </div>
+        </PageTransition>
     );
 }
 export default Landing;

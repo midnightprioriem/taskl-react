@@ -16,3 +16,18 @@
     font-weight: 500;
     user-select: none;
 }
+
+.signUpLoginDiv {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 30px;
+}
+
+.loginButton {
+    margin: 10px;
+}
+
+.signUpButton {
+    margin: 10px;
+}

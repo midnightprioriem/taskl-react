@@ -8,13 +8,16 @@ import TasklApiKit from '../TasklApi/TasklApi';
 import styles from './login.module.css';
 import PasswordField from './PasswordField';
 import LoadingButton from './LoadingButton';
+import PageTransition from './PageTransition';
+import { useHistory } from 'react-router-dom';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+}
 
-const Login = ({userLoggedIn}) => {
+const Login = ({ userLoggedIn }) => {
 
+    const history = useHistory();
     const handleCloseError = () => {
         setErrorOpen(false);
     }
@@ -27,7 +30,7 @@ const Login = ({userLoggedIn}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(TasklApiKit.hasToken) {
+        if (TasklApiKit.hasToken) {
             //already logged in
             return;
         }
@@ -35,9 +38,10 @@ const Login = ({userLoggedIn}) => {
         const result = await TasklApiKit.loginRequest(username, password);
         setLoading(false);
         console.log(result);
-        if(result?.success) {
+        if (result?.success) {
             userLoggedIn(true);
             console.log("login success!");
+            history.push("/app");
         }
         else {
             setErrorText(result ? result.data : "Unable to connect to server.");
@@ -46,62 +50,65 @@ const Login = ({userLoggedIn}) => {
     }
 
     return (
-        <Container className={styles.root}>
-            <Snackbar open={errorOpen} onClose={handleCloseError} autoHideDuration={6000} >
-                <Alert severity="error">
-                    Unable to login. Error: {errorText}
-                </Alert>
-            </Snackbar>
-            <Typography variant="h3" align="center" gutterBottom style={{ fontWeight: 700 }}>
-                Sign In.
+        <PageTransition>
+            <Container className={styles.container}>
+                <Snackbar open={errorOpen} onClose={handleCloseError} autoHideDuration={6000} >
+                    <Alert severity="error">
+                        Unable to login. Error: {errorText}
+                    </Alert>
+                </Snackbar>
+                <Typography className={styles.readOnlyText} variant="h3" align="center" gutterBottom style={{ fontWeight: 700 }}>
+                    Sign In.
+            </Typography >
+                <Typography className={styles.readOnlyText} variant="body1" color="textSecondary" align="center">
+                    Welcome Back!
             </Typography>
-            <Typography variant="body1" color="textSecondary" align="center">
-                Welcome Back!
-            </Typography>
-            <form onSubmit={handleSubmit}>
-                <TextField
-                    InputProps={{
-                        className: styles.textInput,
-                    }}
-                    margin="normal"
-                    id="username"
-                    label="Username"
-                    variant="outlined"
-                    fullWidth={true}
-                    onChange={e => setUserName(e.target.value)} />
-                <PasswordField
-                    id="password"
-                    fullWidth={true}
-                    margin="normal"
-                    onChange={e => setPassword(e.target.value)}
-                />
-                < FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Stay logged in"
-                />
-                <LoadingButton
-                    type="submit"
-                    loading={loading}
-                    buttonClassName={styles.button}
-                    variant="contained"
-                    color="primary"
-                    fullWidth={true}
-                    endIcon={<ArrowRightAltIcon />}
-                    label="Login" />
-                <Grid container justifyContent="space-between">
-                    <Grid item>
-                        <Link href="#" variant="body2" >
-                            Forgot password?
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        InputProps={{
+                            className: styles.textInput,
+                        }}
+                        margin="normal"
+                        id="username"
+                        label="Username"
+                        variant="outlined"
+                        fullWidth={true}
+                        onChange={e => setUserName(e.target.value)} />
+                    <PasswordField
+                        id="password"
+                        fullWidth={true}
+                        margin="normal"
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    < FormControlLabel
+                        control={<Checkbox value="remember" color="primary" />}
+                        label="Stay logged in"
+                    />
+                    <LoadingButton
+                        // @ts-ignore
+                        type="submit"
+                        loading={loading}
+                        buttonClassName={styles.button}
+                        variant="contained"
+                        color="primary"
+                        fullWidth={true}
+                        endIcon={<ArrowRightAltIcon />}
+                        label="Login" />
+                    <Grid container justifyContent="space-between">
+                        <Grid item>
+                            <Link href="#" variant="body2" >
+                                Forgot password?
                         </Link>
+                        </Grid>
+                        <Grid item>
+                            <Link href="#" variant="body2" >
+                                {"Don't have an account? Sign Up"}
+                            </Link>
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <Link href="#" variant="body2" >
-                            {"Don't have an account? Sign Up"}
-                        </Link>
-                    </Grid>
-                </Grid>
-            </form>
-        </Container >
+                </form>
+            </Container >
+        </PageTransition>
     );
 }
 

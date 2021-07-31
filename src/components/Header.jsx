@@ -1,4 +1,5 @@
-import { Typography } from '@material-ui/core';
+import React from 'react';
+import { Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 import logo from '../vector/taskl.svg';
@@ -13,6 +14,10 @@ const Header = () => {
             <Typography className={styles.text} variant="h6" color="textPrimary" align="center">
                 taskl
             </Typography>
+            <div className={styles.signUpLoginDiv}>
+                <Button className={styles.signUpButton} component={Link} to="/register" size="large">Sign Up</Button>
+                <Button className={styles.loginButton} component={Link} to="/login" size="large" variant="contained" color="primary">Login</Button>
+            </div>
         </div>
 
     );
