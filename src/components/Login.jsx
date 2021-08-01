@@ -10,6 +10,8 @@ import PasswordField from './PasswordField';
 import LoadingButton from './LoadingButton';
 import PageTransition from './PageTransition';
 import { useHistory } from 'react-router-dom';
+import undrawLogin from '../vector/undraw_Login_re_4vu2.svg';
+
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -57,6 +59,7 @@ const Login = ({ userLoggedIn }) => {
                         Unable to login. Error: {errorText}
                     </Alert>
                 </Snackbar>
+                <img className={styles.image} src={undrawLogin} alt="" />
                 <Typography className={styles.readOnlyText} variant="h3" align="center" gutterBottom style={{ fontWeight: 700 }}>
                     Sign In.
             </Typography >
@@ -76,6 +79,7 @@ const Login = ({ userLoggedIn }) => {
                         onChange={e => setUserName(e.target.value)} />
                     <PasswordField
                         id="password"
+                        label="Password"
                         fullWidth={true}
                         margin="normal"
                         onChange={e => setPassword(e.target.value)}

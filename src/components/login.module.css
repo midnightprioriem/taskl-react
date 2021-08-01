@@ -6,6 +6,7 @@
     flex-wrap: nowrap;
     align-content: center;
     justify-content: center;
+    align-items: center;
 }
 
 .textInput {
@@ -20,4 +21,10 @@
 
 .readOnlyText {
     user-select: none;
+}
+
+.image {
+    width: 30vmax;
+    max-width: 300px;
+    margin: 30px;
 }

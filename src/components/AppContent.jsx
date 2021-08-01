@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Landing from "./Landing";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import SignUpComplete from "./SignUpComplete";
 
 const AppContent = () => {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [registered, setRegistered] = useState(false);
 
     const location = useLocation();
     return (
@@ -19,7 +21,10 @@ const AppContent = () => {
                     <Login userLoggedIn={setLoggedIn} />
                 </Route>
                 <Route path="/register">
-                    <SignUp/>
+                    {<SignUp userRegistered={setRegistered} />}
+                </Route>
+                <Route path="/registration-complete">
+                    {registered ? <SignUpComplete /> : <Redirect to="/register"/>}
                 </Route>
                 <Route path="/tasks" >
                     {loggedIn ?

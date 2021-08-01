@@ -15,7 +15,8 @@ const PasswordField = (props) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    return (<TextField
+    return (
+    <TextField
         InputProps={{
             className: styles.textInput,
             endAdornment:
@@ -30,7 +31,6 @@ const PasswordField = (props) => {
 
                 </InputAdornment>
         }}
-        label="Password"
         variant="outlined"
         type={values.showPassword ? 'text' : 'password'}
         {...props}

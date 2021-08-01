@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import Header from './components/Header';
 import Copyright from './components/Copyright';
-import { NordLight } from "./themes/norde";
+import { NordLight, NordDark } from "./themes/norde";
 import AppContent from 'components/AppContent';
 
 function App() {

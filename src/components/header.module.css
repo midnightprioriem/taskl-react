@@ -25,9 +25,11 @@
 }
 
 .loginButton {
+    border-radius: 24px;
     margin: 10px;
 }
 
 .signUpButton {
+    border-radius: 24px;
     margin: 10px;
 }
