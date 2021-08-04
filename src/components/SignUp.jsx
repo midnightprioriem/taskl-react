@@ -87,7 +87,6 @@ const SignUp = ({ userRegistered }) => {
                     <PasswordField
                         id="password"
                         label="Password"
-                        autoFocus={true}
                         onFocus={handlePasswordPopoverOpen}
                         onBlur={handlePasswordPopoverClose}
                         fullWidth={true}
