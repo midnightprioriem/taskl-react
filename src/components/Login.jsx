@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Checkbox, FormControlLabel, Link, Container, TextField, Typography, Snackbar } from '@material-ui/core';
+import { Grid, Checkbox, FormControlLabel, Link, Container, TextField, Typography } from '@material-ui/core';
 import {Link as RouterLink} from 'react-router-dom';
-import MuiAlert from '@material-ui/lab/Alert';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import TasklApiKit from '../TasklApi/TasklApi';
@@ -12,11 +11,7 @@ import LoadingButton from './LoadingButton';
 import PageTransition from './PageTransition';
 import { useHistory } from 'react-router-dom';
 import undrawLogin from '../vector/undraw_Login_re_4vu2.svg';
-
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import ErrorSnackbar from './ErrorSnackbar';
 
 const Login = ({ userLoggedIn }) => {
 
@@ -55,11 +50,9 @@ const Login = ({ userLoggedIn }) => {
     return (
         <PageTransition>
             <Container className={styles.container}>
-                <Snackbar open={errorOpen} onClose={handleCloseError} autoHideDuration={6000} >
-                    <Alert severity="error">
+                <ErrorSnackbar open={errorOpen} onClose={handleCloseError} >
                         Unable to login. Error: {errorText}
-                    </Alert>
-                </Snackbar>
+                </ErrorSnackbar>
                 <img className={styles.image} src={undrawLogin} alt="" />
                 <Typography className={styles.readOnlyText} variant="h3" align="center" gutterBottom style={{ fontWeight: 700 }}>
                     Sign In.

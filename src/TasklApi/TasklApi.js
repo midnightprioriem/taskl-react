@@ -12,19 +12,23 @@ const api = axios.create({
 
 let TasklApiKit = {
     hasToken: false,
+
     apiInterceptor: null,
+
     setClientToken(token) {
         this.hasToken = true;
-        this.apiInterceptor = api.interceptors.request.use(function(config) {
+        this.apiInterceptor = api.interceptors.request.use(function (config) {
             config.headers.Authorization = `Token ${token}`;
             return config;
         })
     },
+
     removeClientToken() {
         this.hasToken = false;
         api.interceptors.request.eject(this.apiInterceptor);
         this.apiInterceptor = null;
     },
+
     async registerUser(username, email, password1, password2) {
         console.log("User registration");
         try {
@@ -51,11 +55,12 @@ let TasklApiKit = {
             console.log(error);
             return {
                 success: false,
-                error: error.message,
-                data: error.response.data,
+                error: error?.message,
+                data: error?.response?.data,
             };
         }
     },
+
     async loginRequest(username, password) {
         console.log("Login Request");
         try {

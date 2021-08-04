@@ -26,8 +26,15 @@
 .image {
     width: 30vmax;
     max-width: 300px;
-    margin: 30px;
+    margin: 2vmax;
     pointer-events: none;
+}
+
+@media only screen and (max-width: 500px) {
+    .image {
+        visibility: hidden;
+        height: 0px;
+    }
 }
 
 .passwordHintPopover {

@@ -1,4 +1,4 @@
-import { Container, Popover, TextField, Typography, Snackbar } from '@material-ui/core';
+import { Container, TextField, Typography } from '@material-ui/core';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import React, { useState, useEffect } from 'react';
 import LoadingButton from './LoadingButton';
@@ -8,11 +8,7 @@ import styles from './signup.module.css';
 import undrawSignUp from '../vector/undraw_Hello_re_3evm.svg';
 import { useHistory } from 'react-router-dom';
 import TasklApiKit from '../TasklApi/TasklApi';
-import MuiAlert from '@material-ui/lab/Alert';
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import ErrorSnackbar from './ErrorSnackbar';
 
 const SignUp = ({ userRegistered }) => {
     const [username, setUserName] = useState("");
@@ -29,8 +25,6 @@ const SignUp = ({ userRegistered }) => {
     const [password1Error, setPassword1Error] = useState(false);
     const [password2ErrorText, setPassword2ErrorText] = useState("");
     const [password2Error, setPassword2Error] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
@@ -70,48 +64,36 @@ const SignUp = ({ userRegistered }) => {
         }
         else {
             const { error, data } = result;
-            setErrorText(result ? error : "Unable to connect to server.");
-            const { username, email, password1, password2 } = data;
-            if (username) {
-                setUsernameError(true);
-                setUsernameErrorText(username);
-            }
-            if (email) {
-                setEmailError(true);
-                setEmailErrorText(email);
-            }
-            if(password1) {
-                setPassword1Error(true);
-                setPassword1ErrorText(password1);
-            }
-            if(password2) {
-                setPassword2Error(true);
-                setPassword2ErrorText(password2);
+            setErrorText(error ? error : "Unable to connect to server.");
+            if (data) {
+                const { username, email, password1, password2 } = data;
+                if (username) {
+                    setUsernameError(true);
+                    setUsernameErrorText(username);
+                }
+                if (email) {
+                    setEmailError(true);
+                    setEmailErrorText(email);
+                }
+                if (password1) {
+                    setPassword1Error(true);
+                    setPassword1ErrorText(password1);
+                }
+                if (password2) {
+                    setPassword2Error(true);
+                    setPassword2ErrorText(password2);
+                }
             }
             setErrorOpen(true);
         }
     }
 
-    const handlePasswordPopoverOpen = (event) => {
-        console.log("Password popup open!");
-        setAnchorEl(event.currentTarget);
-        return false;
-    }
-
-    const handlePasswordPopoverClose = () => {
-        console.log("Password popup closed!");
-        setAnchorEl(null);
-        return false;
-    }
-
     return (
         <PageTransition>
             <Container className={styles.root}>
-                <Snackbar open={errorOpen} onClose={handleCloseError} autoHideDuration={6000} >
-                    <Alert severity="error">
+                <ErrorSnackbar open={errorOpen} onClose={handleCloseError} >
                         Unable to Sign Up. Error: {errorText}
-                    </Alert>
-                </Snackbar>
+                </ErrorSnackbar>
                 <img className={styles.image} src={undrawSignUp} alt="" />
                 <Typography className={styles.readOnlyText} variant="h3" align="center" gutterBottom style={{ fontWeight: 700 }}>
                     Sign Up.
@@ -147,44 +129,12 @@ const SignUp = ({ userRegistered }) => {
                         variant="outlined"
                         fullWidth={true}
                         onChange={e => setEmail(e.target.value)} />
-                    <Popover
-                        id="mouse-over-popover"
-                        classes={{
-                            paper: styles.passwordHintPopover,
-                        }}
-                        disableAutoFocus={true}
-                        disableEnforceFocus={true}
-                        open={open}
-                        anchorEl={anchorEl}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                        }}
-                        onClose={handlePasswordPopoverClose}
-                        disableRestoreFocus>
-                        <Typography variant="subtitle1">
-                            Password Requirements
-                        </Typography>
-                        <Typography variant="body2">
-                            Password must contain at least 8 characters.
-                        </Typography>
-                        <Typography variant="body2">
-                            Password must not contain only numbers.
-                        </Typography>
-
-                    </Popover>
                     <PasswordField
                         id="password"
                         error={password1Error}
                         helperText={password1ErrorText}
                         autoComplete="new-password"
                         label="Password"
-                        onFocus={handlePasswordPopoverOpen}
-                        onBlur={handlePasswordPopoverClose}
                         fullWidth={true}
                         margin="normal"
                         onChange={e => setPassword1(e.target.value)}
