@@ -45,18 +45,20 @@ const SignUp = ({ userRegistered }) => {
                 <img className={styles.image} src={undrawSignUp} alt="" />
                 <Typography className={styles.readOnlyText} variant="h3" align="center" gutterBottom style={{ fontWeight: 700 }}>
                     Sign Up.
-            </Typography >
+                </Typography >
                 <Typography className={styles.readOnlyText} variant="body1" color="textSecondary" align="center">
                     Create an account
-            </Typography>
+                </Typography>
                 <form onSubmit={handleSubmit}>
                     <TextField
                         InputProps={{
                             className: styles.textInput,
                         }}
+                        autoFocus={true}
                         margin="normal"
                         id="username"
                         label="Username"
+                        autoComplete="username"
                         variant="outlined"
                         fullWidth={true}
                         onChange={e => setUserName(e.target.value)} />
@@ -67,25 +69,43 @@ const SignUp = ({ userRegistered }) => {
                         margin="normal"
                         id="email"
                         label="Email"
+                        autoComplete="email"
                         variant="outlined"
                         fullWidth={true}
                         onChange={e => setEmail(e.target.value)} />
                     <Popover
                         id="mouse-over-popover"
+                        classes={{
+                            paper: styles.passwordHintPopover,
+                        }}
                         disableAutoFocus={true}
                         disableEnforceFocus={true}
                         open={open}
                         anchorEl={anchorEl}
                         anchorOrigin={{
                             vertical: 'bottom',
-                            horizontal: 'left',
+                            horizontal: 'center',
                         }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                          }}
                         onClose={handlePasswordPopoverClose}
                         disableRestoreFocus>
-                        <Typography>I use Popover.</Typography>
+                        <Typography variant="subtitle1">
+                          Password Requirements
+                        </Typography>
+                        <Typography variant="body2">
+                          Password must contain at least 8 characters.
+                        </Typography>
+                        <Typography variant="body2">
+                          Password must not contain only numbers.
+                        </Typography>
+
                     </Popover>
                     <PasswordField
                         id="password"
+                        autoComplete="new-password"
                         label="Password"
                         onFocus={handlePasswordPopoverOpen}
                         onBlur={handlePasswordPopoverClose}
@@ -95,6 +115,7 @@ const SignUp = ({ userRegistered }) => {
                     />
                     <PasswordField
                         id="password-confirm"
+                        autoComplete="new-password"
                         label="Confirm Password"
                         fullWidth={true}
                         margin="normal"

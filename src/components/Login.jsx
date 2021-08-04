@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Checkbox, FormControlLabel, Link, Container, TextField, Typography, Snackbar } from '@material-ui/core';
+import {Link as RouterLink} from 'react-router-dom';
 import MuiAlert from '@material-ui/lab/Alert';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
@@ -71,6 +72,8 @@ const Login = ({ userLoggedIn }) => {
                         InputProps={{
                             className: styles.textInput,
                         }}
+                        autoFocus={true}
+                        autoComplete="email"
                         margin="normal"
                         id="username"
                         label="Username"
@@ -79,6 +82,7 @@ const Login = ({ userLoggedIn }) => {
                         onChange={e => setUserName(e.target.value)} />
                     <PasswordField
                         id="password"
+                        autoComplete="password"
                         label="Password"
                         fullWidth={true}
                         margin="normal"
@@ -105,7 +109,7 @@ const Login = ({ userLoggedIn }) => {
                         </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="#" variant="body2" >
+                            <Link component={RouterLink} to="/register" variant="body2" >
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>

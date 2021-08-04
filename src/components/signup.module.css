@@ -27,4 +27,9 @@
     width: 30vmax;
     max-width: 300px;
     margin: 30px;
+    pointer-events: none;
+}
+
+.passwordHintPopover {
+    padding: 20px;
 }
