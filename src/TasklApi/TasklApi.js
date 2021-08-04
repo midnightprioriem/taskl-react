@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 
 const apiUrl = 'http://127.0.0.1:8000/';
 const loginUrl = 'dj-rest-auth/login/';
-const registrationUrl = "dj-rest-auth/register";
+const registrationUrl = "dj-rest-auth/registration/";
 
 const api = axios.create({
     baseURL: apiUrl,
@@ -25,14 +25,17 @@ let TasklApiKit = {
         api.interceptors.request.eject(this.apiInterceptor);
         this.apiInterceptor = null;
     },
-    async registerUser(username, email, password) {
+    async registerUser(username, email, password1, password2) {
         console.log("User registration");
         try {
             const response = await api.post(registrationUrl, {
-                username: username,
-                email: email,
-                password: password,
+                'username': username,
+                'email': email,
+                'password1': password1,
+                'password2': password2,
             });
+            console.log(response.data);
+            console.log(response.request);
             if (response.status === StatusCodes.OK) {
                 return {
                     success: true,
@@ -48,7 +51,8 @@ let TasklApiKit = {
             console.log(error);
             return {
                 success: false,
-                data: error.message,
+                error: error.message,
+                data: error.response.data,
             };
         }
     },
@@ -56,8 +60,8 @@ let TasklApiKit = {
         console.log("Login Request");
         try {
             const response = await api.post(loginUrl, {
-                username: username,
-                password: password,
+                'username': username,
+                'password': password,
             });
             if (response.status === StatusCodes.OK) {
                 // @ts-ignore
