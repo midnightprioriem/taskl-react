@@ -5,7 +5,7 @@ import { CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import Header from './components/Header';
-import Copyright from './components/Copyright';
+import Footer from './components/Footer';
 import { NordLight, NordDark } from "./themes/norde";
 import AppContent from 'components/AppContent';
 
@@ -19,7 +19,7 @@ function App() {
                     <Router>
                         <Header />
                         <AppContent />
-                        <Copyright />
+                        <Footer />
                     </Router>
                 </div>
             </StylesProvider>

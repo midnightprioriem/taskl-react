@@ -38,9 +38,9 @@ let TasklApiKit = {
                 'password1': password1,
                 'password2': password2,
             });
-            console.log(response.data);
+            console.log(response.status);
             console.log(response.request);
-            if (response.status === StatusCodes.OK) {
+            if (response.status === StatusCodes.CREATED) {
                 return {
                     success: true,
                     data: null,
