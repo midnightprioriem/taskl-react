@@ -1,6 +1,16 @@
 import { createTheme } from '@material-ui/core/styles';
 
-const NordDark = createTheme({
+const NordLight = {
+    paragraphFontFamily: "Montserrat",
+    color: {
+        accent1: "#8FBCBB",
+        accent2: "#88C0D0",
+        accent3: "#81A1C1",
+        accent4: "#81A1C1",
+    }
+}
+
+const MuiNordDark = createTheme({
     typography: {
         fontFamily: [
             'Montserrat',
@@ -45,7 +55,7 @@ const NordDark = createTheme({
     }
 });
 
-const NordLight = createTheme({
+const MuiNordLight = createTheme({
     typography: {
         fontFamily: [
             'Montserrat',
@@ -90,6 +100,7 @@ const NordLight = createTheme({
 });
 
 export {
-    NordDark,
     NordLight,
+    MuiNordDark,
+    MuiNordLight,
 }

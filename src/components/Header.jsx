@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@components';
 import logo from '@/vector/taskl.svg';
 import styles from '@components/header.module.css';
+import { NordLight } from '@/themes/norde';
 
 const Header = () => {
     return (
@@ -18,7 +19,7 @@ const Header = () => {
                 </Typography>
             </div>
             <div className={styles.signUpLoginDiv}>
-                <Button className={styles.signUpButton} component={Link} to="/register" size="large">Sign Up</Button>
+                <Button color={NordLight.color.accent4} to="/register" size="large" href="https://github.com/midnightprioriem">Sign Up</Button>
                 <Button className={styles.loginButton} component={Link} to="/login" size="large" variant="contained" color="primary">Login</Button>
             </div>
         </div>

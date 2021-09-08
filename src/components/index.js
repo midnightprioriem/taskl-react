@@ -1,4 +1,4 @@
-import Button from '@components/Button';
+import Button from '@/components/Button/Button';
 import ErrorSnackbar from '@components/ErrorSnackbar';
 import Footer from '@components/Footer';
 import Header from '@components/Header';

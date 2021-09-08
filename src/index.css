@@ -10,6 +10,10 @@ body {
     height: 100%;
 }
 
+p {
+    font-family: 'Montserrat';
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
