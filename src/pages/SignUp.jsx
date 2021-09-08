@@ -1,14 +1,14 @@
 import { Container, TextField, Typography } from '@material-ui/core';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import React, { useState, useEffect } from 'react';
-import LoadingButton from './LoadingButton';
-import PageTransition from './PageTransition';
-import PasswordField from './PasswordField';
+import LoadingButton from '../components/LoadingButton';
+import PageTransition from '../components/PageTransition';
+import PasswordField from '../components/PasswordField';
 import styles from './signup.module.css';
 import undrawSignUp from '../vector/undraw_Hello_re_3evm.svg';
 import { useHistory } from 'react-router-dom';
 import TasklApiKit from '../TasklApi/TasklApi';
-import ErrorSnackbar from './ErrorSnackbar';
+import ErrorSnackbar from '../components/ErrorSnackbar';
 
 const SignUp = ({ userRegistered }) => {
     const [username, setUserName] = useState("");

@@ -6,12 +6,12 @@ import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 
 import TasklApiKit from '../TasklApi/TasklApi';
 import styles from './login.module.css';
-import PasswordField from './PasswordField';
-import LoadingButton from './LoadingButton';
-import PageTransition from './PageTransition';
+import PasswordField from '../components/PasswordField';
+import LoadingButton from '../components/LoadingButton';
+import PageTransition from '../components/PageTransition';
 import { useHistory } from 'react-router-dom';
 import undrawLogin from '../vector/undraw_Login_re_4vu2.svg';
-import ErrorSnackbar from './ErrorSnackbar';
+import ErrorSnackbar from '../components/ErrorSnackbar';
 
 const Login = ({ userLoggedIn }) => {
 

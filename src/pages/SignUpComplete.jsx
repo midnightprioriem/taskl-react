@@ -1,6 +1,6 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import PageTransition from './PageTransition';
+import PageTransition from '../components/PageTransition';
 import styles from './signupcomplete.module.css';
 import emailSent from '../vector/undraw_Mail_sent_re_0ofv.svg';
 

@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import Landing from "./Landing";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import SignUpComplete from "./SignUpComplete";
+import {Landing, Login, SignUp, SignUpComplete} from '@pages';
 
 const AppContent = () => {
     const [loggedIn, setLoggedIn] = useState(false);

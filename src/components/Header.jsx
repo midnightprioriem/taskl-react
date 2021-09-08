@@ -1,9 +1,10 @@
 import React from 'react';
-import { Typography, Button } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-import logo from '../vector/taskl.svg';
-import styles from './header.module.css';
+import { Button } from '@components';
+import logo from '@/vector/taskl.svg';
+import styles from '@components/header.module.css';
 
 const Header = () => {
     return (

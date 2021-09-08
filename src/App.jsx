@@ -1,13 +1,12 @@
-import './App.css';
+import '@/App.css';
 import React from 'react';
 import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-import { NordLight, NordDark } from "./themes/norde";
-import AppContent from 'components/AppContent';
+import { Header, Footer } from '@components';
+import { NordLight, NordDark } from "@/themes/norde";
+import { AppContent } from '@pages';
 
 function App() {
 
